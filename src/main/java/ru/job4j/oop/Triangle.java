@@ -16,11 +16,7 @@ public class Triangle {
     }
 
     public boolean exist(double ab, double ac, double bc) {
-        if (ab + ac > bc && ab + bc > ac && ac + bc > ab) {
-            return true;
-        } else {
-            return false;
-        }
+       return  (ab + ac > bc && ab + bc > ac && ac + bc > ab);
     }
 
     public double area() {
@@ -30,8 +26,7 @@ public class Triangle {
         double bc = second.distance(third);
         double p = period(ab, ac, bc);
         if (this.exist(ab, ac, bc)) {
-            double area = p * ((p - ab) * (p - ac) * (p - bc));
-            rsl = Math.sqrt(area);
+            rsl = Math.sqrt(p * ((p - ab) * (p - ac) * (p - bc)));
         }
         return rsl;
     }
