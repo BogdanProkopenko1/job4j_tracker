@@ -6,34 +6,27 @@ public class Item {
     private String name;
     private LocalDateTime created = LocalDateTime.now();
 
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public Item() {
-    }
-
+    public Item() { }
     public Item(int identifier) {
         this.id = identifier;
     }
-
     public Item(int identifier, String nam) {
         this.id = identifier;
         this.name = nam;
     }
 
+    public LocalDateTime getCreated() {
+        return created;
+    }
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
