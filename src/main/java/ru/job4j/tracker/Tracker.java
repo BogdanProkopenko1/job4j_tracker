@@ -32,16 +32,20 @@ public class Tracker {
     }
 
     public Item[] findByName(String key) {
-        int counter = 0;
-        Item[] result = new Item[items.length];
-        for (int i = 0; i < items.length; i++) {
-            if (items[i].equals(key)) {
-                result[counter] = items[i];
-                counter++;
+            int counter = 0;
+            Item[] result = new Item[items.length];
+            if (key != null) {
+                for (int i = 0; i < items.length; i++) {
+                    if (items[i].equals(key)) {
+                        result[counter] = items[i];
+                        counter++;
+                    }
+                }
+                result = Arrays.copyOf(result, counter);
+            } else {
+                System.out.println("Incorrect question!");
             }
-        }
-        result = Arrays.copyOf(result, counter);
-        return result;
+            return result;
     }
 
     private int indexOf(int id) {
