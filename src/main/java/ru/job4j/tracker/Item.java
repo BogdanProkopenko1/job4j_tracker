@@ -10,11 +10,10 @@ public class Item {
     public Item(int identifier) {
         this.id = identifier;
     }
-    public Item(int identifier, String nam) {
+    public Item(int identifier, String name) {
         this.id = identifier;
-        this.name = nam;
+        this.name = name;
     }
-
     public LocalDateTime getCreated() {
         return created;
     }
