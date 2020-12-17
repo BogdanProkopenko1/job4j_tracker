@@ -11,15 +11,13 @@ public class StartUI {
             this.showMenu();
             int select = Integer.valueOf(scanner.nextLine());
             if (select == 0) {
-                int id = 1;
                 System.out.print(System.lineSeparator() + "=== Create a new Item ==="
                         + System.lineSeparator() + "Enter name: ");
                 String name = scanner.nextLine();
-                Item item = new Item(id, name);
+                Item item = new Item(name);
                 tracker.add(item);
                 System.out.println("Item successful created." + System.lineSeparator() + "============================="
                         + System.lineSeparator() + System.lineSeparator() + System.lineSeparator());
-                id += 1;
             } else if (select == 1) {
                 System.out.println(System.lineSeparator() + "=== All items ===");
                 Item[] out = tracker.findAll();
@@ -69,7 +67,7 @@ public class StartUI {
                 + System.lineSeparator() + "Enter name: ");
                 String name = scanner.nextLine();
                 Item[] rsl = tracker.findByName(name);
-                if (rsl.length != 000) {
+                if (rsl.length != 0) {
                     System.out.println("Result: ");
                     for (int i = 0; i < rsl.length; i++) {
                         System.out.println(rsl[i]);

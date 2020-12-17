@@ -14,6 +14,11 @@ public class Item {
         this.id = identifier;
         this.name = name;
     }
+
+    public Item(String name) {
+        this.name = name;
+    }
+
     public LocalDateTime getCreated() {
         return created;
     }
