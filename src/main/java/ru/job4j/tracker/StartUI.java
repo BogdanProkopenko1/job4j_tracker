@@ -1,7 +1,6 @@
 package ru.job4j.tracker;
 
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class StartUI {
@@ -10,47 +9,72 @@ public class StartUI {
         boolean run = true;
         while (run) {
             this.showMenu();
-            int select;
-            select = Integer.valueOf(scanner.nextLine());
+            int select = Integer.valueOf(scanner.nextLine());
             if (select == 0) {
                 int id = 1;
-                System.out.println(System.lineSeparator() + "=== Create a new Item ===");
-                System.out.print("Enter name: ");
+                System.out.print(System.lineSeparator() + "=== Create a new Item ==="
+                        + System.lineSeparator() + "Enter name: ");
                 String name = scanner.nextLine();
                 Item item = new Item(id, name);
                 tracker.add(item);
-                System.out.println("Item successful created." + System.lineSeparator() + "=============================" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator());
+                System.out.println("Item successful created." + System.lineSeparator() + "============================="
+                        + System.lineSeparator() + System.lineSeparator() + System.lineSeparator());
                 id += 1;
             } else if (select == 1) {
                 System.out.println(System.lineSeparator() + "=== All items ===");
-                System.out.println(Arrays.toString(tracker.findAll()));
-                System.out.println("All items showed." + System.lineSeparator() + "=============================" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator());
+                Item[] out = tracker.findAll();
+                for (int i = 0; i < out.length; i++) {
+                    System.out.println(out[i]);
+                }
+                System.out.println("All items showed." + System.lineSeparator() + "============================="
+                        + System.lineSeparator() + System.lineSeparator() + System.lineSeparator());
             } else if (select == 2) {
-                System.out.println(System.lineSeparator() + "=== Edit item ===");
-                System.out.print("Item id: ");
+                System.out.print(System.lineSeparator() + "=== Edit item ===" + System.lineSeparator() + "Item id: ");
                 int id = Integer.valueOf(scanner.nextLine());
-                System.out.println("Item: " + tracker.findById(id).toString());
                 System.out.print("New item name: ");
                 String newName = scanner.nextLine();
                 Item item = new Item(id, newName);
-                tracker.replace(id, item);
-                System.out.println("Item was successful edited." + System.lineSeparator() + "=============================" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator());
+                if (tracker.replace(id, item)) {
+                    System.out.println("Item was successful edited.");
+                } else {
+                    System.out.println("ERROR. Item not found.");
+                }
+                System.out.println("=============================" + System.lineSeparator()
+                        + System.lineSeparator() + System.lineSeparator());
             } else if (select == 3) {
-                System.out.println(System.lineSeparator() + "=== Delete item ===");
-                System.out.print("Item id: ");
+                System.out.println(System.lineSeparator() + "=== Delete item ==="
+                        + System.lineSeparator() + "Item id: ");
                 int id = Integer.valueOf(scanner.nextLine());
-                tracker.delete(id);
-                System.out.println("Item was deleted." + System.lineSeparator() + "=============================" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator());
+                if (tracker.delete(id)) {
+                    System.out.println("Item was deleted!");
+                } else {
+                    System.out.println("ERROR");
+                }
+                System.out.println("=============================" + System.lineSeparator()
+                        + System.lineSeparator() + System.lineSeparator());
             } else if (select == 4) {
                 System.out.println(System.lineSeparator() + "=== Find item by Id ===");
                 System.out.print("Enter item id: ");
                 int id = Integer.valueOf(scanner.nextLine());
-                System.out.println("Result = " + tracker.findById(id).toString() + System.lineSeparator() + "=============================" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator());
+                Item rsl = tracker.findById(id);
+                if (rsl != null) {
+                    System.out.println("Result = " + rsl.toString());
+                } else {
+                    System.out.println("Item not found.");
+                }
+                System.out.println("=============================" + System.lineSeparator()
+                        + System.lineSeparator() + System.lineSeparator());
             } else if (select == 5) {
-                System.out.println(System.lineSeparator() + "=== Find items by name ===");
-                System.out.print("Enter name: ");
+                System.out.print(System.lineSeparator() + "=== Find items by name ==="
+                + System.lineSeparator() + "Enter name: ");
                 String name = scanner.nextLine();
-                System.out.println("Result = " + tracker.findByName(name).toString() + System.lineSeparator() + "=============================" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator());
+                Item[] rsl = tracker.findByName(name);
+                System.out.println("Result: ");
+                for (int i = 0; i < rsl.length; i++) {
+                    System.out.println(rsl[i]);
+                }
+                System.out.println("=============================" + System.lineSeparator()
+                        + System.lineSeparator() + System.lineSeparator());
             } else if (select == 6) {
                 System.out.println(System.lineSeparator() + "Program is closed.");
                 run = false;
