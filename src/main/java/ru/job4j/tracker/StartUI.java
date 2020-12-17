@@ -69,9 +69,13 @@ public class StartUI {
                 + System.lineSeparator() + "Enter name: ");
                 String name = scanner.nextLine();
                 Item[] rsl = tracker.findByName(name);
-                System.out.println("Result: ");
-                for (int i = 0; i < rsl.length; i++) {
-                    System.out.println(rsl[i]);
+                if (rsl.length != 000) {
+                    System.out.println("Result: ");
+                    for (int i = 0; i < rsl.length; i++) {
+                        System.out.println(rsl[i]);
+                    }
+                } else {
+                    System.out.println("Item(s) not found.");
                 }
                 System.out.println("=============================" + System.lineSeparator()
                         + System.lineSeparator() + System.lineSeparator());
