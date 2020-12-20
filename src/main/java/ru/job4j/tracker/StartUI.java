@@ -1,82 +1,100 @@
 package ru.job4j.tracker;
 
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 
 public class StartUI {
 
-    public void init(Scanner scanner, Tracker tracker) {
+    public static void createItem(Input input, Tracker tracker) {
+        System.out.println(System.lineSeparator() + "=== Create a new Item ===");
+        String name = input.askStr("Enter name: ");
+        Item item = new Item(name);
+        tracker.add(item);
+        System.out.println("Item successful created." + System.lineSeparator() + "============================="
+                + System.lineSeparator() + System.lineSeparator() + System.lineSeparator());
+    }
+
+    public static void showAllItems(Tracker tracker) {
+        System.out.println(System.lineSeparator() + "=== All items ===");
+        Item[] out = tracker.findAll();
+        for (Item item : out) {
+            System.out.println(item);
+        }
+        System.out.println("All items showed." + System.lineSeparator() + "============================="
+                + System.lineSeparator() + System.lineSeparator() + System.lineSeparator());
+    }
+
+    public static void editItem(Input input, Tracker tracker) {
+        System.out.println(System.lineSeparator() + "=== Edit item ===");
+        int id = input.askInt("Item id: ");
+        String newName = input.askStr("New item name: ");
+        Item item = new Item(id, newName);
+        if (tracker.replace(id, item)) {
+            System.out.println("Item was successful edited.");
+        } else {
+            System.out.println("ERROR. Item not found.");
+        }
+        System.out.println("=============================" + System.lineSeparator()
+                + System.lineSeparator() + System.lineSeparator());
+    }
+
+    public static void deleteItem(Input input, Tracker tracker) {
+        System.out.println(System.lineSeparator() + "=== Delete item ===");
+        int id = input.askInt("Item id: ");
+        if (tracker.delete(id)) {
+            System.out.println("Item was deleted!");
+        } else {
+            System.out.println("ERROR. Item not found.");
+        }
+        System.out.println("=============================" + System.lineSeparator()
+                + System.lineSeparator() + System.lineSeparator());
+    }
+
+    public static void itemById(Input input, Tracker tracker) {
+        System.out.println(System.lineSeparator() + "=== Find item by Id ===");
+        int id = input.askInt("Enter item id: ");
+        Item rsl = tracker.findById(id);
+        if (rsl != null) {
+            System.out.println("Result = " + rsl.toString());
+        } else {
+            System.out.println("Item not found.");
+        }
+        System.out.println("=============================" + System.lineSeparator()
+                + System.lineSeparator() + System.lineSeparator());
+    }
+
+    public static void itemsByName(Input input, Tracker tracker) {
+        System.out.println(System.lineSeparator() + "=== Find items by name ===");
+        String name = input.askStr("Enter name: ");
+        Item[] rsl = tracker.findByName(name);
+        if (rsl.length != 0) {
+            System.out.println("Result: ");
+            for (Item item : rsl) {
+                System.out.println(item);
+            }
+        } else {
+            System.out.println("Item(s) not found.");
+        }
+        System.out.println("=============================" + System.lineSeparator()
+                + System.lineSeparator() + System.lineSeparator());
+    }
+
+    public void init(Input input, Tracker tracker) {
         boolean run = true;
         while (run) {
             this.showMenu();
-            int select = Integer.valueOf(scanner.nextLine());
+            int select = input.askInt("Select: ");
             if (select == 0) {
-                System.out.print(System.lineSeparator() + "=== Create a new Item ==="
-                        + System.lineSeparator() + "Enter name: ");
-                String name = scanner.nextLine();
-                Item item = new Item(name);
-                tracker.add(item);
-                System.out.println("Item successful created." + System.lineSeparator() + "============================="
-                        + System.lineSeparator() + System.lineSeparator() + System.lineSeparator());
+                StartUI.createItem(input, tracker);
             } else if (select == 1) {
-                System.out.println(System.lineSeparator() + "=== All items ===");
-                Item[] out = tracker.findAll();
-                for (int i = 0; i < out.length; i++) {
-                    System.out.println(out[i]);
-                }
-                System.out.println("All items showed." + System.lineSeparator() + "============================="
-                        + System.lineSeparator() + System.lineSeparator() + System.lineSeparator());
+                StartUI.showAllItems(tracker);
             } else if (select == 2) {
-                System.out.print(System.lineSeparator() + "=== Edit item ===" + System.lineSeparator() + "Item id: ");
-                int id = Integer.valueOf(scanner.nextLine());
-                System.out.print("New item name: ");
-                String newName = scanner.nextLine();
-                Item item = new Item(id, newName);
-                if (tracker.replace(id, item)) {
-                    System.out.println("Item was successful edited.");
-                } else {
-                    System.out.println("ERROR. Item not found.");
-                }
-                System.out.println("=============================" + System.lineSeparator()
-                        + System.lineSeparator() + System.lineSeparator());
+                StartUI.editItem(input, tracker);
             } else if (select == 3) {
-                System.out.println(System.lineSeparator() + "=== Delete item ==="
-                        + System.lineSeparator() + "Item id: ");
-                int id = Integer.valueOf(scanner.nextLine());
-                if (tracker.delete(id)) {
-                    System.out.println("Item was deleted!");
-                } else {
-                    System.out.println("ERROR");
-                }
-                System.out.println("=============================" + System.lineSeparator()
-                        + System.lineSeparator() + System.lineSeparator());
+                StartUI.deleteItem(input, tracker);
             } else if (select == 4) {
-                System.out.println(System.lineSeparator() + "=== Find item by Id ===");
-                System.out.print("Enter item id: ");
-                int id = Integer.valueOf(scanner.nextLine());
-                Item rsl = tracker.findById(id);
-                if (rsl != null) {
-                    System.out.println("Result = " + rsl.toString());
-                } else {
-                    System.out.println("Item not found.");
-                }
-                System.out.println("=============================" + System.lineSeparator()
-                        + System.lineSeparator() + System.lineSeparator());
+                StartUI.itemById(input, tracker);
             } else if (select == 5) {
-                System.out.print(System.lineSeparator() + "=== Find items by name ==="
-                + System.lineSeparator() + "Enter name: ");
-                String name = scanner.nextLine();
-                Item[] rsl = tracker.findByName(name);
-                if (rsl.length != 0) {
-                    System.out.println("Result: ");
-                    for (int i = 0; i < rsl.length; i++) {
-                        System.out.println(rsl[i]);
-                    }
-                } else {
-                    System.out.println("Item(s) not found.");
-                }
-                System.out.println("=============================" + System.lineSeparator()
-                        + System.lineSeparator() + System.lineSeparator());
+               StartUI.itemsByName(input, tracker);
             } else if (select == 6) {
                 System.out.println(System.lineSeparator() + "Program is closed.");
                 run = false;
@@ -99,9 +117,9 @@ public class StartUI {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Input input = new ConsoleInput();
         Tracker tracker = new Tracker();
-        new StartUI().init(scanner, tracker);
+        new StartUI().init(input, tracker);
         Item item = new Item();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
         System.out.println(item.getCreated().format(formatter));
