@@ -7,9 +7,10 @@ public class Tracker {
     private int ids = 1;
     private int size = 0;
 
-    public void add(Item item) {
+    public Item add(Item item) {
         item.setId(ids++);
         items[size++] = item;
+        return item;
     }
 
     public Item findById(int id) {
