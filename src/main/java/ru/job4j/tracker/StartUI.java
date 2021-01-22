@@ -4,10 +4,10 @@ import java.time.format.DateTimeFormatter;
 
 public class StartUI {
 
-    private final Output output;
+    private final Output out;
 
-    public StartUI(Output output) {
-        this.output = output;
+    public StartUI(Output out) {
+        this.out = out;
     }
 
     public void init(Input input, Tracker tracker, UserAction[] actions) {
@@ -21,21 +21,21 @@ public class StartUI {
     }
 
     private void showMenu(UserAction[] actions) {
-        System.out.println("Menu.");
+        out.println("Menu.");
         for (int index = 0; index < actions.length; index++) {
-            System.out.println(index + ". " + actions[index].name());
+            out.println(index + ". " + actions[index].name());
         }
     }
 
     public static void main(String[] args) {
-        Output output = new ConsoleOutput();
+        Output out = new ConsoleOutput();
         Input input = new ConsoleInput();
         Tracker tracker = new Tracker();
         UserAction[] actions = {
-                new CreateAction(), new ReplaceAction(), new DeleteAction(), new ShowAction(), new ShowToIdAction(),
-                new ShowToNameAction(), new ExitAction()
+                new CreateAction(out), new ReplaceAction(out), new DeleteAction(out), new ShowAction(out), new ShowToIdAction(out),
+                new ShowToNameAction(out), new ExitAction()
         };
-        new StartUI(output).init(input, tracker, actions);
+        new StartUI(out).init(input, tracker, actions);
         Item item = new Item();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
         System.out.println(item.getCreated().format(formatter));
