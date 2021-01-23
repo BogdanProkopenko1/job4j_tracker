@@ -19,7 +19,7 @@ public class ShowAction implements UserAction {
         for (Item item : out) {
             output.println(item);
         }
-        System.out.println("All items showed." + System.lineSeparator() + "============================="
+        output.println("All items showed." + System.lineSeparator() + "============================="
                 + System.lineSeparator() + System.lineSeparator() + System.lineSeparator());
         return true;
     }
