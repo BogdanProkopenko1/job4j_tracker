@@ -2,12 +2,13 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class StartUITest {
 
-/*
     @Test
     public void whenCreateItem() {
         Input in = new StubInput(
@@ -16,7 +17,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Output output = new ConsoleOutput();
         UserAction[] actions = {
-                new CreateAction(out),
+                new CreateAction(output),
                 new ExitAction()
         };
         new StartUI(output).init(in, tracker, actions);
@@ -32,7 +33,7 @@ public class StartUITest {
                 new String[] {"0", String.valueOf(item.getId()), "New name", "1"}
         );
         UserAction[] actions = {
-                new ReplaceAction(out),
+                new ReplaceAction(output),
                 new ExitAction()
         };
         new StartUI(output).init(in, tracker, actions);
@@ -48,7 +49,7 @@ public class StartUITest {
                 new String[] {"0", String.valueOf(item.getId()), "1"}
         );
         UserAction[] actions = {
-                new DeleteAction(out),
+                new DeleteAction(output),
                 new ExitAction()
         };
         new StartUI(output).init(in, tracker, actions);
@@ -64,7 +65,7 @@ public class StartUITest {
                 new String[] {"0", "1", "1"}
         );
         UserAction[] actions = {
-                new ShowToIdAction(out),
+                new ShowToIdAction(output),
                 new ExitAction()
         };
         new StartUI(output).init(input, tracker, actions);
@@ -82,7 +83,7 @@ public class StartUITest {
                 new String[] {"0", "Test", "1"}
         );
         UserAction[] actions = {
-                new ShowToNameAction(out),
+                new ShowToNameAction(output),
                 new ExitAction()
         };
         new StartUI(output).init(input, tracker, actions);
@@ -90,7 +91,7 @@ public class StartUITest {
         Item[] added = {item0, item1};
         assertThat(rsl, is(added));
     }
- */
+
     @Test
     public void whenAllItems() {
         Tracker tracker = new Tracker();
@@ -106,7 +107,16 @@ public class StartUITest {
         };
         new StartUI(out).init(input, tracker, actions);
         Item[] items = {item0, item1};
-        assertThat(out.toString(), is(items));
+
+        assertThat(out.toString(), is(
+                "Menu." + System.lineSeparator() +
+                        "0. === All items ===" + System.lineSeparator() +
+                        "1. === Exit ===" + System.lineSeparator() + item0.toString() + System.lineSeparator() +
+                        item1.toString() + System.lineSeparator() + "All items showed." + System.lineSeparator() +
+                        "=============================" + System.lineSeparator() + System.lineSeparator() +
+                        System.lineSeparator() + System.lineSeparator() + "Menu." + System.lineSeparator() +
+                        "0. === All items ===" + System.lineSeparator() + "1. === Exit ===" + System.lineSeparator())
+        );
     }
 
     @Test
