@@ -66,7 +66,14 @@ public class StartUITest {
                 new ExitAction()
         };
         new StartUI(output).init(input, tracker, actions);
-        assertThat(tracker.findById(item.getId()), is(item));
+        assertThat(output.toString(), is(
+                "Menu." + System.lineSeparator() +
+                        "0. === Find item by Id ===" + System.lineSeparator() +
+                        "1. === Exit ===" + System.lineSeparator() + "Result = " + item.toString() + System.lineSeparator() +
+                        "=============================" + System.lineSeparator() + System.lineSeparator() +
+                        System.lineSeparator() + System.lineSeparator() + "Menu." + System.lineSeparator() +
+                        "0. === Find item by Id ===" + System.lineSeparator() + "1. === Exit ===" + System.lineSeparator())
+        );
     }
 
     @Test
@@ -84,9 +91,15 @@ public class StartUITest {
                 new ExitAction()
         };
         new StartUI(output).init(input, tracker, actions);
-        Item[] rsl = tracker.findByName("Test");
-        Item[] added = {item0, item1};
-        assertThat(rsl, is(added));
+        assertThat(output.toString(), is(
+                "Menu." + System.lineSeparator() +
+                        "0. === Find items by name ===" + System.lineSeparator() +
+                        "1. === Exit ===" + System.lineSeparator() + "Result: " + System.lineSeparator() + item0.toString() + System.lineSeparator() +
+                        item1.toString() + System.lineSeparator() +
+                        "=============================" + System.lineSeparator() + System.lineSeparator() +
+                        System.lineSeparator() + System.lineSeparator() + "Menu." + System.lineSeparator() +
+                        "0. === Find items by name ===" + System.lineSeparator() + "1. === Exit ===" + System.lineSeparator())
+        );
     }
 
     @Test
