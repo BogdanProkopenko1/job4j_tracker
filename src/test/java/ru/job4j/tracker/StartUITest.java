@@ -116,8 +116,6 @@ public class StartUITest {
                 new ExitAction()
         };
         new StartUI(out).init(input, tracker, actions);
-        Item[] items = {item0, item1};
-
         assertThat(out.toString(), is(
                 "Menu." + System.lineSeparator() +
                         "0. === All items ===" + System.lineSeparator() +
