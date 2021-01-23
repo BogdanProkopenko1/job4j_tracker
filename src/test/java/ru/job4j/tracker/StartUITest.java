@@ -1,9 +1,6 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
-
-import java.util.Arrays;
-
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -15,7 +12,7 @@ public class StartUITest {
                 new String[] {"0", "Item name", "1"}
         );
         Tracker tracker = new Tracker();
-        Output output = new ConsoleOutput();
+        Output output = new StubOutput();
         UserAction[] actions = {
                 new CreateAction(output),
                 new ExitAction()
@@ -27,7 +24,7 @@ public class StartUITest {
     @Test
     public void whenReplaceItem() {
         Tracker tracker = new Tracker();
-        Output output = new ConsoleOutput();
+        Output output = new StubOutput();
         Item item = tracker.add(new Item("Name"));
         Input in = new StubInput(
                 new String[] {"0", String.valueOf(item.getId()), "New name", "1"}
@@ -43,7 +40,7 @@ public class StartUITest {
     @Test
     public void whenDeleteItem() {
         Tracker tracker = new Tracker();
-        Output output = new ConsoleOutput();
+        Output output = new StubOutput();
         Item item = tracker.add(new Item("Deleted item"));
         Input in = new StubInput(
                 new String[] {"0", String.valueOf(item.getId()), "1"}
@@ -59,7 +56,7 @@ public class StartUITest {
     @Test
     public void whenFindById() {
         Tracker tracker = new Tracker();
-        Output output = new ConsoleOutput();
+        Output output = new StubOutput();
         Item item = tracker.add(new Item("Test"));
         Input input = new StubInput(
                 new String[] {"0", "1", "1"}
@@ -75,7 +72,7 @@ public class StartUITest {
     @Test
     public void whenFindByName() {
         Tracker tracker = new Tracker();
-        Output output = new ConsoleOutput();
+        Output output = new StubOutput();
         Item item0 = tracker.add(new Item("Test"));
         Item item1 = tracker.add(new Item("Test"));
         Item item2 = tracker.add(new Item("Test 2"));
