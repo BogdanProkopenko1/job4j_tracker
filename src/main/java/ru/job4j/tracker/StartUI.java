@@ -33,11 +33,11 @@ public class StartUI {
 
     public static void main(String[] args) {
         Output out = new ConsoleOutput();
-        Input input = new ValidateInput();
+        Input input = new ValidateInput(out, new ConsoleInput());
         Tracker tracker = new Tracker();
         UserAction[] actions = {
-                new CreateAction(out), new ReplaceAction(out), new DeleteAction(out), new ShowAction(out), new ShowToIdAction(out),
-                new ShowToNameAction(out), new ExitAction()
+                new CreateAction(out), new ReplaceAction(out), new DeleteAction(out), new ShowAction(out),
+                new ShowToIdAction(out), new ShowToNameAction(out), new ExitAction()
         };
         new StartUI(out).init(input, tracker, actions);
         Item item = new Item();
