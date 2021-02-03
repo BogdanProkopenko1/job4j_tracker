@@ -15,17 +15,22 @@ public class BankService {
 
     public void addAccount(String passport, Account account) {
         User user = findByPassport(passport);
+        boolean add = true;
         for (Account rsl : users.get(user)) {
-     //       ArrayList<Account> result = new ArrayList<>();
-       //     result.add(rsl);
             String check = rsl.getRequisite();
-            if (!check.contains(account.getRequisite())) {
-         //       Account add = new Account(account.getRequisite(), account.getBalance());
-           //     result.add(add);
-             //   users.put(user, result);
-             //   users.put(user, users.get(user).add(account));
+            if (check.contains(account.getRequisite())) {
+                add = false;
+                break;
             }
         }
+        if (!add) {
+            List<Account> put = new ArrayList<>();
+            for (Account accounts : users.get(user)) {
+                put.add(accounts);
+            }
+            put.add(account);
+            users.put(user, put);
+            }
     }
 
     public User findByPassport(String passport) {
@@ -51,17 +56,29 @@ public class BankService {
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String destRequisite, double amount) {
         Account transfer = new Account();
-        User user = findByPassport(destPassport);
-        for (Account account1 : users.get(findByPassport(destPassport))) {
-            transfer = account1.getRequisite().contains(destRequisite) ? account1 : null;
-        }
-        for (Account account2 : users.get(findByPassport(srcPassport))) {
-            if (account2.getRequisite().contains(srcRequisite)) {
-                double balance = transfer.getBalance() + amount;
-                transfer.setBalance(balance);
+        boolean rsl = false;
+        User dest = findByPassport(destPassport);
+        User src = findByPassport(srcPassport);
+        for (Account accountDest : users.get(dest)) {
+            if (accountDest.getRequisite().contains(destRequisite)) {
+                transfer = accountDest;
+                break;
             }
         }
-        boolean rsl = false;
+        for (Account accountSrc : users.get(src)) {
+            if (accountSrc.getRequisite().contains(srcRequisite)) {
+                if (amount >= accountSrc.getBalance()) {
+                    double balanceNow = transfer.getBalance() + amount;
+                    transfer.setBalance(balanceNow);
+                    rsl = true;
+                    break;
+                } else {
+                    System.out.println("The transferred amount exceeds the account balance.");
+                    rsl = false;
+                    break;
+                }
+            }
+        }
         return rsl;
     }
 }
