@@ -40,10 +40,9 @@ public class BankService {
             for (Account account : users.get(findByPassport(passport))) {
                 if (account.getRequisite().equals(requisite)) {
                     rsl = account;
+                    break;
                 }
             }
-        } else {
-            return null;
         }
         return rsl;
     }
