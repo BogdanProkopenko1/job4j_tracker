@@ -11,7 +11,7 @@ public class JobTest {
     public void whenComparatorByNameAndPriority() {
         Comparator<Job> cmpNamePriority = new JobSortNameDown().thenComparing(new JobSortPriorityDown());
         int rsl = cmpNamePriority.compare(
-                new Job("Impl task", 0),
+                new Job("Fix bug", 0),
                 new Job("Fix bug", 1)
         );
         assertThat(rsl, lessThan(0));
@@ -22,7 +22,7 @@ public class JobTest {
         Comparator<Job> sort = new JobSortPriorityUp();
         int rsl = sort.compare(
                 new Job("Fps", 2),
-                new Job("Framrate", 0)
+                new Job("Fps", 0)
         );
         assertThat(rsl, greaterThan(0));
     }
@@ -32,7 +32,7 @@ public class JobTest {
         Comparator<Job> sort = new JobSortPriorityDown();
         int rsl = sort.compare(
                 new Job("Homework", 0),
-                new Job("Programming", 5)
+                new Job("Homework", 5)
         );
         assertThat(rsl, greaterThan(0));
     }
@@ -62,7 +62,7 @@ public class JobTest {
         Comparator<Job> sort = new JobSortPriorityUp().thenComparing(new JobSortNameDown());
         int rsl = sort.compare(
                 new Job("Learn", 1),
-                new Job("Relax", 0)
+                new Job("Relax", 1)
         );
         assertThat(rsl, greaterThan(0));
     }
