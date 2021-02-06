@@ -5,6 +5,7 @@ import java.util.List;
 
 public final class Tracker {
 
+    private int ids = 1;
     private static Tracker instance = null;
     private List<Item> items = new ArrayList<Item>();
 
@@ -19,7 +20,9 @@ public final class Tracker {
     }
 
     public Item add(Item item) {
+        item.setId(ids);
         items.add(item);
+        ids++;
         return item;
     }
 
@@ -48,12 +51,13 @@ public final class Tracker {
         for (Item check : items) {
             if (check.getId() == id) {
                 rsl = index;
+                break;
             }
             index++;
         }
             return rsl;
     }
-        public boolean replace (int id, Item item){
+        public boolean replace (int id, Item item) {
             boolean result = false;
             int index = indexOf(id);
             if (index != -1) {
@@ -64,9 +68,10 @@ public final class Tracker {
             return result;
         }
 
-        public boolean delete (int id){
-            if (indexOf(id) != -1) {
-                items.remove(indexOf(id));
+        public boolean delete (int id) {
+        int index = indexOf(id);
+            if (index != -1) {
+                items.remove(index);
                 return true;
             } else {
                 return false;
