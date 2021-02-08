@@ -9,10 +9,12 @@ public class Item implements Comparable<Item> {
     private LocalDateTime created = LocalDateTime.now();
 
     public Item() { }
+
     public Item(int identifier, String name) {
         this.id = identifier;
         this.name = name;
     }
+
     public Item(String name) {
         this.name = name;
     }
@@ -20,26 +22,30 @@ public class Item implements Comparable<Item> {
     public LocalDateTime getCreated() {
         return created;
     }
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
 
     @Override
     public String toString() {
-        return "Item{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", created=" + created +
-                '}';
+        return "Item{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", created=" + created
+                + '}';
     }
 
     @Override

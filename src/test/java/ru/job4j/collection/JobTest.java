@@ -9,12 +9,12 @@ public class JobTest {
 
     @Test
     public void whenComparatorByNameAndPriority() {
-        Comparator<Job> cmpNamePriority = new JobSortNameDown().thenComparing(new JobSortPriorityDown());
-        int rsl = cmpNamePriority.compare(
+        Comparator<Job> cmpNmPr = new JobSortNameDown().thenComparing(new JobSortPriorityDown());
+        int rsl = cmpNmPr.compare(
                 new Job("Fix bug", 0),
                 new Job("Fix bug", 1)
         );
-        assertThat(rsl, lessThan(0));
+        assertThat(rsl, greaterThan(0));
     }
 
     @Test
