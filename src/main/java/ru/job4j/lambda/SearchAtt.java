@@ -2,44 +2,90 @@ package ru.job4j.lambda;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiFunction;
-import java.util.function.BinaryOperator;
-import java.util.function.Function;
+import java.util.function.*;
 
 public class SearchAtt {
-    /*
 
-    public static List<Attachment> loop(List<Attachment> f) {
-
+    private static int filter(int to, BiFunction<Integer, Integer, Integer> func, Supplier<Integer> initValue) {
+        int rsl = initValue.get();
+        for (int index = 1; index <= to; index++) {
+            rsl = func.apply(rsl, index);
+        }
+        return rsl;
     }
 
-    public static List<Attachment> filterSize(List<Attachment> list, int to) {
-        Function<List<Attachment>, List<Attachment>> function
-         = new BinaryOperator<List<Attachment>>() {
+    public static int summation(int to) {
+        BiFunction<Integer, Integer, Integer> func = new BinaryOperator<Integer>() {
             @Override
-            public List<Attachment> apply(List<Attachment> attachments,
-             List<Attachment> attachments2) {
-
-                return;
+            public Integer apply(Integer left, Integer right) {
+                return left + right;
             }
-        }
-        List<Attachment> rsl = new ArrayList<>();
-        for (Attachment att : list) {
-            if (att.getSize() > 100) {
-                rsl.add(att);
+        };
+        Supplier<Integer> initValue = new Supplier<Integer>() {
+            @Override
+            public Integer get() {
+                return 0;
             }
-        }
-        return rsl;
+        };
+        return filter(to, func, initValue);
     }
 
-    public static List<Attachment> filterName(List<Attachment> list) {
-        List<Attachment> rsl = new ArrayList<>();
-        for (Attachment att : list) {
-            if (att.getName().contains("bug")) {
-                rsl.add(att);
+    public static int multiplication(int to) {
+        BiFunction<Integer, Integer, Integer> func = new BinaryOperator<Integer>() {
+            @Override
+            public Integer apply(Integer left, Integer right) {
+                return left * right;
             }
-        }
-        return rsl;
+        };
+        Supplier<Integer> initValue = new Supplier<Integer>() {
+            @Override
+            public Integer get() {
+                return 1;
+            }
+        };
+        return filter(to, func, initValue);
+    }
+
+
+/*
+    public static List<Attachment> filterSize(List<Attachment> list, int size) {
+        Function<Attachment, Attachment> function = new UnaryOperator<Attachment>() {
+            @Override
+            public Attachment apply(Attachment attachment) {
+                if (attachment.getSize() > initSize.get()) {
+                    return attachment;
+                } else {
+                    return null;
+                }
+            }
+            Supplier<Integer> initSize = new Supplier<Integer>() {
+                @Override
+                public Integer get() {
+                    return size;
+                }
+            };
+        };
+        return filter(list, initSize);
+    }
+
+    public static List<Attachment> filterName(List<Attachment> list, String name) {
+        Function<Attachment, Attachment> function = new UnaryOperator<Attachment>() {
+            @Override
+            public Attachment apply(Attachment attachment) {
+                if (attachment.getSize() > initSize.get()) {
+                    return attachment;
+                } else {
+                    return null;
+                }
+            }
+            Supplier<String> initName = new Supplier<String>() {
+                @Override
+                public String get() {
+                    return name;
+                }
+            };
+        };
+        return filter(list, value);
     }
 
  */
