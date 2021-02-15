@@ -6,29 +6,28 @@ import java.util.function.*;
 
 public class SearchAtt {
 
-    private static int filter(int to, BiFunction<Integer, Integer, Integer> func, Supplier<Integer> initValue) {
-        int rsl = initValue.get();
-        for (int index = 1; index <= to; index++) {
-            rsl = func.apply(rsl, index);
+    private static List<Attachment> filter(List<Attachment> list, Predicate<String> func) {
+        List<Attachment> rsl = new ArrayList<>();
+        for (int index = 0; index <= list.size(); index++) {
+            if (func.test(list.get(index).getName())) {
+                rsl.add(list.get(index));
+            }
         }
         return rsl;
     }
 
-    public static int summation(int to) {
-        BiFunction<Integer, Integer, Integer> func = new BinaryOperator<Integer>() {
-            @Override
-            public Integer apply(Integer left, Integer right) {
-                return left + right;
-            }
-        };
-        Supplier<Integer> initValue = new Supplier<Integer>() {
-            @Override
-            public Integer get() {
-                return 0;
-            }
-        };
-        return filter(to, func, initValue);
+    public List<Attachment> FName(List<Attachment> list) {
+        Predicate<String> func = (value) -> value.equals("bug");
+        return filter(list, func);
     }
+
+    public List<Attachment> FSize(List<Attachment> list) {
+        int size = 100;
+        Predicate<String> func = (value) -> value > size;
+        return filter(list, func);
+    }
+
+    /*
 
     public static int multiplication(int to) {
         BiFunction<Integer, Integer, Integer> func = new BinaryOperator<Integer>() {
@@ -46,8 +45,6 @@ public class SearchAtt {
         return filter(to, func, initValue);
     }
 
-
-/*
     public static List<Attachment> filterSize(List<Attachment> list, int size) {
         Function<Attachment, Attachment> function = new UnaryOperator<Attachment>() {
             @Override
