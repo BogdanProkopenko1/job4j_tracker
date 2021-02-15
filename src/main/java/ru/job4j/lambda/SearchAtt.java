@@ -23,7 +23,7 @@ public class SearchAtt {
 
     public List<Attachment> FSize(List<Attachment> list) {
         int size = 100;
-        Predicate<String> func = (value) -> value > size;
+        Predicate<Integer> func = (value) -> value > size;
         return filter(list, func);
     }
 
