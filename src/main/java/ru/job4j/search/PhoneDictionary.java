@@ -19,18 +19,14 @@ public class PhoneDictionary {
 
     public ArrayList<Person> find(String key) {
         ArrayList<Person> result = new ArrayList<>();
+        Predicate<Person> findByName = (person) -> person.getName().contains(key);
+        Predicate<Person> findBySurname = (person) -> person.getSurname().contains(key);
+        Predicate<Person> findByPhone = (person) -> person.getPhone().contains(key);
+        Predicate<Person> findByAddress = (person) -> person.getAddress().contains(key);
+        Predicate<Person> def = findByAddress.or(findByName.or(findByPhone.or(findBySurname)));
         for (int i = 0; i < persons.size(); i++) {
             Person person = persons.get(i);
-            Predicate<Person> findByName = (name) -> person.getName().contains(key);
-            Predicate<Person> findBySurname = (surname) -> person.getSurname().contains(key);
-            Predicate<Person> findByPhone = (phone) -> person.getPhone().contains(key);
-            Predicate<Person> findByAddress = (address) -> person.getAddress().contains(key);
-            Predicate<Person> findAll = (obj) ->
-                            findByAddress.test(obj)
-                            || findByName.test(obj)
-                            || findBySurname.test(obj)
-                            || findByPhone.test(obj);
-            if (findAll.test(person)) {
+            if (def.test(person)) {
                 result.add(persons.get(i));
             }
         }
