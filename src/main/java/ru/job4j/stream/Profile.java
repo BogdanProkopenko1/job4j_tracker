@@ -2,6 +2,7 @@ package ru.job4j.stream;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Profile {
@@ -23,5 +24,10 @@ public class Profile {
             }
         };
         return rsl.stream().sorted(comparator).distinct().collect(Collectors.toList());
+    }
+
+    public static Map<String, Class<? extends Student>> studentMap(List<Student> in) {
+        return in.stream().distinct().collect(Collectors.toMap(x -> x.getSurname(),
+                y -> y.getClass()));
     }
 }
