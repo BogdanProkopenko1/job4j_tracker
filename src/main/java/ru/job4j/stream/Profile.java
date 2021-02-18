@@ -17,13 +17,7 @@ public class Profile {
                         s.address.getHome(),
                         s.address.getApartment()))
                 .collect(Collectors.toList());
-        Comparator<Address> comparator = new Comparator<Address>() {
-            @Override
-            public int compare(Address o1, Address o2) {
-                return o1.getCity().compareTo(o2.getCity());
-            }
-        };
-        return rsl.stream().sorted(comparator).distinct().collect(Collectors.toList());
+        return rsl.stream().sorted(Comparator.comparing(Address::getCity)).distinct().collect(Collectors.toList());
     }
 
     public static Map<String, Student> studentMap(List<Student> in) {
