@@ -26,8 +26,8 @@ public class Profile {
         return rsl.stream().sorted(comparator).distinct().collect(Collectors.toList());
     }
 
-    public static Map<String, Class<? extends Student>> studentMap(List<Student> in) {
-        return in.stream().distinct().collect(Collectors.toMap(x -> x.getSurname(),
-                y -> y.getClass()));
+    public static Map<String, Student> studentMap(List<Student> in) {
+        return in.stream().collect(Collectors.toMap(Student::getSurname,
+                y -> y));
     }
 }
