@@ -9,7 +9,6 @@ public class Profile {
     public Address address;
 
     public static Map<String, Student> studentMap(List<Student> in) {
-        return in.stream().collect(Collectors.toMap(Student::getSurname,
-                y -> y));
+        return in.stream().collect(Collectors.toMap(Student::getSurname, y -> y, (s, s1) -> s));
     }
 }
