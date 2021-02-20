@@ -8,7 +8,20 @@ public class Profile {
 
     public Address address;
 
-    public static Map<String, Student> studentMap(List<Student> in) {
-        return in.stream().collect(Collectors.toMap(Student::getSurname, y -> y, (s, s1) -> s));
+    public static Map<String, List<Student>> studentMap(List<Student> in) {
+        return in.stream()
+                .collect(Collectors.groupingBy(Student::getSurname, Collectors.toList()));
+    }
+
+    public static void main(String[] args) {
+        List<Student> operand = List.of(
+                new Student(50, "Igor"),
+                new Student(70, "Bogdan"),
+                new Student(90, "Dima"),
+                new Student(30, "Dasha"),
+                new Student(60, "Valeria"),
+                new Student(60, "Sergey")
+        );
+        System.out.println(studentMap(operand));
     }
 }
