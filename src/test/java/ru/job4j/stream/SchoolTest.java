@@ -14,15 +14,17 @@ public class SchoolTest {
 
     @Before
     public void setUp() {
-        students.add(new Student(10, "Surname1"));
-        students.add(new Student(20, "Surname2"));
-        students.add(new Student(30, "Surname3"));
-        students.add(new Student(40, "Surname4"));
-        students.add(new Student(50, "Surname5"));
-        students.add(new Student(60, "Surname6"));
-        students.add(new Student(70, "Surname7"));
-        students.add(new Student(80, "Surname8"));
-        students.add(new Student(90, "Surname9"));
+        students = List.of(
+                new Student(10, "Surname1"),
+                new Student(20, "Surname2"),
+                new Student(30, "Surname3"),
+                new Student(40, "Surname4"),
+                new Student(50, "Surname5"),
+                new Student(60, "Surname6"),
+                new Student(70, "Surname7"),
+                new Student(80, "Surname8"),
+                new Student(90, "Surname9")
+        );
     }
 
     @Test
@@ -31,9 +33,11 @@ public class SchoolTest {
         Predicate<Student> pr = (p) -> p.getScore() >= 70;
         List<Student> rsl = sc.collect(students, pr);
         List<Student> expected = new ArrayList<>();
-        expected.add(new Student(70, "Surname7"));
-        expected.add(new Student(80, "Surname8"));
-        expected.add(new Student(90, "Surname9"));
+        expected = List.of(
+                new Student(70, "Surname7"),
+                new Student(80, "Surname8"),
+                new Student(90, "Surname9")
+        );
         assertThat(rsl, is(expected));
     }
 
@@ -43,8 +47,10 @@ public class SchoolTest {
         Predicate<Student> pr = (p) -> p.getScore() < 70 && p.getScore() >= 50;
         List<Student> rsl = sc.collect(students, pr);
         List<Student> expected = new ArrayList<>();
-        expected.add(new Student(50, "Surname5"));
-        expected.add(new Student(60, "Surname6"));
+        expected = List.of(
+                new Student(50, "Surname5"),
+                new Student(60, "Surname6")
+        );
         assertThat(rsl, is(expected));
     }
 
@@ -54,10 +60,12 @@ public class SchoolTest {
         Predicate<Student> pr =(p) -> p.getScore() < 50 && p.getScore() > 0;
         List<Student> rsl = sc.collect(students, pr);
         List<Student> expected = new ArrayList<>();
-        expected.add(new Student(10, "Surname1"));
-        expected.add(new Student(20, "Surname2"));
-        expected.add(new Student(30, "Surname3"));
-        expected.add(new Student(40, "Surname4"));
+        expected = List.of(
+                new Student(10, "Surname1"),
+                new Student(20, "Surname2"),
+                new Student(30, "Surname3"),
+                new Student(40, "Surname4")
+        );
         assertThat(rsl, is(expected));
     }
 }
