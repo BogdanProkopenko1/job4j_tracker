@@ -2,36 +2,36 @@ package ru.job4j.stream;
 
 public class Computer {
 
-    String gpu;
-    String brand;
-    String processor;
-    String model;
-    int ram;
-    int price;
-    int power;
+    private String gpu;
+    private String brand;
+    private String processor;
+    private String model;
+    private int ram;
+    private int price;
+    private int power;
 
     @Override
     public String toString() {
         return "Computer{" +
                 System.lineSeparator() + "gpu='" + gpu + '\'' +
-                System.lineSeparator() + ", brand='" + brand + '\'' +
-                System.lineSeparator() + ", processor='" + processor + '\'' +
-                System.lineSeparator() + ", model='" + model + '\'' +
-                System.lineSeparator() + ", ram=" + ram +
-                System.lineSeparator() + ", price=" + price +
-                System.lineSeparator() + ", power=" + power +
+                System.lineSeparator() + "brand='" + brand + '\'' +
+                System.lineSeparator() + "processor='" + processor + '\'' +
+                System.lineSeparator() + "model='" + model + '\'' +
+                System.lineSeparator() + "ram=" + ram +
+                System.lineSeparator() + "price=" + price +
+                System.lineSeparator() + "power=" + power +
                 System.lineSeparator() + '}';
     }
 
     static class Builder {
 
-        String gpu;
-        String brand;
-        String processor;
-        String model;
-        int ram;
-        int price;
-        int power;
+        private String gpu;
+        private String brand;
+        private String processor;
+        private String model;
+        private int ram;
+        private int price;
+        private int power;
 
         Builder buildGPU(String gpu) {
             this.gpu = gpu;
