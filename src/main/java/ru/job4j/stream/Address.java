@@ -4,6 +4,14 @@ import java.util.Objects;
 
 public class Address {
 
+    private String city;
+
+    private String street;
+
+    private int home;
+
+    private int apartment;
+
     public Address(String city, String street, int home, int apartment) {
         this.city = city;
         this.street = street;
@@ -27,23 +35,19 @@ public class Address {
         return apartment;
     }
 
-    private String city;
-
-    private String street;
-
-    private int home;
-
-    private int apartment;
-
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Address)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Address)) {
+            return false;
+        }
         Address address = (Address) o;
-        return getHome() == address.getHome() &&
-                getApartment() == address.getApartment() &&
-                Objects.equals(getCity(), address.getCity()) &&
-                Objects.equals(getStreet(), address.getStreet());
+        return getHome() == address.getHome()
+                && getApartment() == address.getApartment()
+                && Objects.equals(getCity(), address.getCity())
+                && Objects.equals(getStreet(), address.getStreet());
     }
 
     @Override

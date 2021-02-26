@@ -6,7 +6,11 @@ import java.util.stream.Collectors;
 
 public class Profile {
 
-    public Address address;
+    private Address address;
+
+    public Address getAddress() {
+        return address;
+    }
 
     public static Map<String, List<Student>> studentMap(List<Student> in) {
         return in.stream()

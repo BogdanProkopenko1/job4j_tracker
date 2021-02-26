@@ -12,15 +12,15 @@ public class Computer {
 
     @Override
     public String toString() {
-        return "Computer{" +
-                System.lineSeparator() + "gpu='" + gpu + '\'' +
-                System.lineSeparator() + "brand='" + brand + '\'' +
-                System.lineSeparator() + "processor='" + processor + '\'' +
-                System.lineSeparator() + "model='" + model + '\'' +
-                System.lineSeparator() + "ram=" + ram +
-                System.lineSeparator() + "price=" + price +
-                System.lineSeparator() + "power=" + power +
-                System.lineSeparator() + '}';
+        return "Computer{"
+                + System.lineSeparator() + "gpu='" + gpu + '\''
+                + System.lineSeparator() + "brand='" + brand + '\''
+                + System.lineSeparator() + "processor='" + processor + '\''
+                + System.lineSeparator() + "model='" + model + '\''
+                + System.lineSeparator() + "ram=" + ram
+                + System.lineSeparator() + "price=" + price
+                + System.lineSeparator() + "power=" + power
+                + System.lineSeparator() + '}';
     }
 
     static class Builder {
@@ -39,7 +39,7 @@ public class Computer {
         }
 
         Builder buildBrand(String brand) {
-            this.brand= brand;
+            this.brand = brand;
             return this;
         }
 

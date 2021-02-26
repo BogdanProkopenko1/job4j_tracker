@@ -16,12 +16,12 @@ public class SearchAtt {
         return rsl;
     }
 
-    public List<Attachment> FName(List<Attachment> list) {
+    public List<Attachment> fName(List<Attachment> list) {
         Predicate<Attachment> func = (value) -> value.getName().equals("bug");
         return filter(list, func);
     }
 
-    public List<Attachment> FSize(List<Attachment> list) {
+    public List<Attachment> fSize(List<Attachment> list) {
         Predicate<Attachment> func = (value) -> value.getSize() > 100;
         return filter(list, func);
     }

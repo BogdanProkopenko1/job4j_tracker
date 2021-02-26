@@ -57,7 +57,7 @@ public class SchoolTest {
     @Test
     public void whenCollectClassC() {
         School sc = new School();
-        Predicate<Student> pr =(p) -> p.getScore() < 50 && p.getScore() > 0;
+        Predicate<Student> pr = (p) -> p.getScore() < 50 && p.getScore() > 0;
         List<Student> rsl = sc.collect(students, pr);
         List<Student> expected = new ArrayList<>();
         expected = List.of(
