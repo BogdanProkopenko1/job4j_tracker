@@ -1,4 +1,3 @@
-/*
 package ru.job4j.collection;
 
 import org.junit.Test;
@@ -78,5 +77,3 @@ public class ArticleTest {
         );
     }
 }
-
- */
