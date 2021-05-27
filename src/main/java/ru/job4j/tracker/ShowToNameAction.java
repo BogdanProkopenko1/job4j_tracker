@@ -1,6 +1,6 @@
 package ru.job4j.tracker;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 
 public class ShowToNameAction implements UserAction {
@@ -17,9 +17,9 @@ public class ShowToNameAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Tracker tracker, Input input) {
+    public boolean execute(Store store, Input input) throws SQLException {
         String name = input.askStr("Enter name: ");
-        List<Item> rsl = tracker.findByName(name);
+        List<Item> rsl = store.findByName(name);
         if (rsl.size() != 0) {
             out.println("Result: ");
             for (Item item : rsl) {

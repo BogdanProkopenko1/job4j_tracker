@@ -3,18 +3,18 @@ package ru.job4j.tracker;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class Tracker {
+public final class MemTracker {
 
-    private static Tracker instance = null;
+    private static MemTracker instance = null;
     private int ids = 1;
     private List<Item> items = new ArrayList<Item>();
 
-    private Tracker() {
+    private MemTracker() {
     }
 
-    public static Tracker getInstance() {
+    public static MemTracker getInstance() {
         if (instance == null) {
-            instance = new Tracker();
+            instance = new MemTracker();
         }
         return instance;
     }

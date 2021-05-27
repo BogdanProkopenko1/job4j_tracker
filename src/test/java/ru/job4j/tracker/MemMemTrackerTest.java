@@ -6,38 +6,38 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
-public class TrackerTest {
+public class MemMemTrackerTest {
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
-        Tracker tracker = Tracker.getInstance();
+        MemTracker memTracker = MemTracker.getInstance();
         Item item = new Item();
         item.setName("test1");
-        tracker.add(item);
-        Item result = tracker.findById(item.getId());
+        memTracker.add(item);
+        Item result = memTracker.findById(item.getId());
         assertThat(result.getName(), is(item.getName()));
     }
 
     @Test
     public void whenReplace() {
-        Tracker tracker = Tracker.getInstance();
+        MemTracker memTracker = MemTracker.getInstance();
         Item bug = new Item();
         bug.setName("Bug");
-        tracker.add(bug);
+        memTracker.add(bug);
         int id = bug.getId();
         Item bugWithDesc = new Item();
         bugWithDesc.setName("Bug with description");
-        tracker.replace(id, bugWithDesc);
-        assertThat(tracker.findById(id).getName(), is("Bug with description"));
+        memTracker.replace(id, bugWithDesc);
+        assertThat(memTracker.findById(id).getName(), is("Bug with description"));
     }
 
     @Test
     public void whenDelete() {
-        Tracker tracker = Tracker.getInstance();
+        MemTracker memTracker = MemTracker.getInstance();
         Item bug = new Item();
         bug.setName("Bug");
-        tracker.add(bug);
+        memTracker.add(bug);
         int id = bug.getId();
-        tracker.delete(id);
-        assertThat(tracker.findById(id), is(nullValue()));
+        memTracker.delete(id);
+        assertThat(memTracker.findById(id), is(nullValue()));
     }
 }
