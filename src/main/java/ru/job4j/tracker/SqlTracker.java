@@ -10,6 +10,12 @@ public class SqlTracker implements Store {
 
     private Connection cn;
 
+    public SqlTracker(Connection connection) {
+        this.cn = connection;
+    }
+
+    public SqlTracker() {}
+
     public Connection getConnection() {
         return cn;
     }
@@ -41,7 +47,7 @@ public class SqlTracker implements Store {
     @Override
     public Item add(Item item) {
         try (PreparedStatement preparedStatement = getConnection().prepareStatement(
-                "insert into items(name) values(?)"
+                "insert into items(name) values(?)", Statement.RETURN_GENERATED_KEYS
         )) {
             preparedStatement.setString(1, item.getName());
             preparedStatement.execute();
@@ -92,7 +98,8 @@ public class SqlTracker implements Store {
     @Override
     public List<Item> findByName(String key) {
         List<Item> rsl = new ArrayList<>();
-        try (PreparedStatement statement = getConnection().prepareStatement("select * from items where name=?")) {
+        try (PreparedStatement statement = getConnection()
+                .prepareStatement("select * from items where name=?")) {
             statement.setString(1, key);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
